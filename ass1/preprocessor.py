@@ -14,5 +14,6 @@ class Preprocessor:
         text = text.lower()
         tokens = nltk.WhitespaceTokenizer().tokenize(text)
         tokens.extend([self.stem(token) for token in tokens])
+        # TODO by me: may add other funcs like usa == u.s.a == united states
 
         return tokens

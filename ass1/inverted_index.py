@@ -74,8 +74,12 @@ class InvertedIndex:
 
         sim_scores = self.similarity_measure(query_vector)
         # TODO sort the results in sim_scores and return only the max_results_returned docs with the highest scores.
-        raise NotImplementedError
-        return sorted_sim_scores
+        # raise NotImplementedError
+        # sorted_sim_scores = []
+        # sort sim scores by its values (reversed order)
+        sim_scores = sorted(sim_scores.items(), key=lambda item: -item[1])
+        # return max_results_returned number of pairs
+        return sim_scores[:max_results_returned]
 
     def set_similarity(self, sim):
         self.similarity_measure = sim(self.postings)
