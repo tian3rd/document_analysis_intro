@@ -11,14 +11,15 @@ import re
 index = InvertedIndex(Preprocessor())
 index.index_directory(os.path.join('gov', 'documents'), use_stored_index=True)
 
-# sim = TFIDF_Similarity
-sim = TF_Similarity
+sim = TFIDF_Similarity
+# sim = TF_Similarity
 index.set_similarity(sim)
+# sim().set_modes("n", "n", "c")
+# index.similarity_measure.set_modes("n", "n", "c")
+print(index.similarity_measure.TF_mode, index.similarity_measure.Norm_mode)
 print(f'Setting similarity to {sim.__name__}')
 
-print()
 print('Index ready.')
-
 
 topics_file = os.path.join('gov', 'topics', 'gov.topics')
 runs_file = os.path.join('runs', 'retrieved.txt')
@@ -59,3 +60,10 @@ with open(runs_file, 'w') as written, open(topics_file) as f:
         # print("{rank} written!".format(rank=rank))
         written.write(trecline)
 
+# print("tokens: {0}; docs: {1}".format(len(index.postings.token_to_doc_counts), len(index.postings.doc_to_token_counts)))
+# for tok in index.postings.token_to_doc_counts:
+#   print("token example: {0}, doc example: {1}".format(tok, index.postings.token_to_doc_counts[tok]))
+#   break
+# for doc in index.postings.doc_to_token_counts:
+#   print("doc example: {0}, token example: {1}".format(doc, index.postings.doc_to_token_counts[doc]))
+#   break
